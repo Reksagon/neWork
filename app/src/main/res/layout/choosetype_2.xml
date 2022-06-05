@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_choosetype"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/fild_width"
+        android:layout_height="@dimen/fild_height"
+        android:background="@drawable/vector_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/bttn_bar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_bar"
+        android:translationZ="70dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <me.tankery.lib.circularseekbar.CircularSeekBar
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/circular_margin"
+        android:layout_marginBottom="@dimen/circular_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </me.tankery.lib.circularseekbar.CircularSeekBar>
+
+    <TextView
+        android:id="@+id/txt_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="0"
+        android:textColor="#DF2323"
+        android:textSize="@dimen/size_text"
+        app:layout_constraintBottom_toBottomOf="@+id/weight"
+        app:layout_constraintEnd_toEndOf="@+id/weight"
+        app:layout_constraintStart_toStartOf="@+id/weight"
+        app:layout_constraintTop_toTopOf="@+id/weight"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <View
+        android:id="@+id/bttn_up_weight"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="45dp"
+        android:background="@drawable/bttn_up_pressed"
+        app:layout_constraintBottom_toBottomOf="@+id/weight"
+        app:layout_constraintEnd_toEndOf="@+id/weight"
+        app:layout_constraintTop_toTopOf="@+id/weight"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/bttn_down_weight"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bttn_down_pressed"
+        app:layout_constraintBottom_toBottomOf="@+id/weight"
+        app:layout_constraintStart_toStartOf="@+id/weight"
+        app:layout_constraintTop_toTopOf="@+id/weight"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="true"
+        android:text="KG"
+        android:textColor="#F8F8FF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_weight"
+        app:layout_constraintEnd_toEndOf="@+id/txt_weight"
+        app:layout_constraintStart_toStartOf="@+id/txt_weight" />
+
+    <me.tankery.lib.circularseekbar.CircularSeekBar
+        android:id="@+id/repss"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/circular_margin"
+        android:layout_marginBottom="@dimen/circular_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </me.tankery.lib.circularseekbar.CircularSeekBar>
+
+    <TextView
+        android:id="@+id/txt_repss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="0"
+        android:textColor="#DF2323"
+        android:textSize="@dimen/size_text"
+        app:layout_constraintBottom_toBottomOf="@+id/weight"
+        app:layout_constraintEnd_toEndOf="@+id/repss"
+        app:layout_constraintStart_toStartOf="@+id/repss"
+        app:layout_constraintTop_toTopOf="@+id/repss"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <View
+        android:id="@+id/bttn_up_repss"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="45dp"
+        android:background="@drawable/bttn_up_pressed"
+        app:layout_constraintBottom_toBottomOf="@+id/repss"
+        app:layout_constraintEnd_toEndOf="@+id/repss"
+        app:layout_constraintTop_toTopOf="@+id/repss"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/bttn_down_repss"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bttn_down_pressed"
+        app:layout_constraintBottom_toBottomOf="@+id/repss"
+        app:layout_constraintStart_toStartOf="@+id/repss"
+        app:layout_constraintTop_toTopOf="@+id/repss"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="true"
+        android:text="REPS"
+        android:textColor="#F8F8FF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_repss"
+        app:layout_constraintEnd_toEndOf="@+id/txt_repss"
+        app:layout_constraintStart_toStartOf="@+id/txt_repss" />
+
+    <com.github.nikartm.button.FitButton
+        android:id="@+id/bttn_start"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="20dp"
+        android:enabled="true"
+        android:gravity="center|center_vertical"
+        app:fb_backgroundColor="#DF2323"
+        app:fb_cornerRadius="40dp"
+        app:fb_fontFamilyRes="@font/poppins_semibold"
+        app:fb_shape="rectangle"
+        app:fb_text="START"
+        app:fb_textColor="#FFF"
+        app:fb_textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/bar_expand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/bar_expand"
+        android:translationZ="50dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/bttn_cancel"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="70dp"
+        android:background="@drawable/ic_cancel"
+        android:translationZ="70dp"
+        app:layout_constraintEnd_toEndOf="@+id/bar_expand"
+        app:layout_constraintTop_toTopOf="@+id/bttn_bar" />
+
+    <TextView
+        android:id="@+id/txt_device_name_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Device nameIP"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:translationZ="70dp"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_numberResistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="numberResistance"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:translationZ="70dp"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/txt_device_name_ip" />
+
+    <TextView
+        android:id="@+id/txt_ratioRange_of"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="ratiogRange of"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:translationZ="70dp"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/txt_numberResistance" />
+
+    <TextView
+        android:id="@+id/txt_resistanceR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="resistanceR"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:translationZ="70dp"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ratioRange_of" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

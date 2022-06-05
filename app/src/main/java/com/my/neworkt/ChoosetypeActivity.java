@@ -44,13 +44,18 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.DialogFragment;
 
+import com.my.neworkt.databinding.Choosetype2Binding;
 import com.my.neworkt.databinding.ChoosetypeBinding;
+
+import me.tankery.lib.circularseekbar.CircularSeekBar;
 
 
 public class ChoosetypeActivity extends  Activity { 
 	
 	private Timer _timer = new Timer();
-	
+
+	private boolean expand = false;
+	private int time_animate = 200;
 	private double train_resist = 0;
 	private double setting_min_resist = 0;
 	private double setting_max_resist = 0;
@@ -122,14 +127,163 @@ public class ChoosetypeActivity extends  Activity {
 	private TimerTask timer_motor;
 	private Calendar cal = Calendar.getInstance();
 
-	ChoosetypeBinding binding;
+	Choosetype2Binding binding;
 
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
+		binding = Choosetype2Binding.inflate(getLayoutInflater());
+		setContentView(binding.getRoot());
 
-		setContentView(R.layout.choosetype);
-		initialize(_savedInstanceState);
+		sharedpref = getSharedPreferences("nwtsp0", Activity.MODE_PRIVATE);
+		reqnet = new RequestNetwork(this);
+		dia0 = new AlertDialog.Builder(this);
+
+		binding.weight.setMax(100);
+		binding.weight.setStartAngle(325);
+		binding.weight.setEndAngle(215);
+		binding.weight.setCircleStrokeWidth(25);
+		binding.weight.setPointerColor(Color.parseColor("#DF2323"));
+		binding.weight.setCircleProgressColor(Color.parseColor("#DF2323"));
+		binding.weight.setPointerStrokeWidth(60);
+		binding.weight.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(CircularSeekBar circularSeekBar, float v, boolean b) {
+				resiat_seek_progress = (int) v;
+				binding.txtWeight.setText(String.valueOf((int) (v + setting_min_resist)));
+			}
+
+			@Override
+			public void onStopTrackingTouch(CircularSeekBar circularSeekBar) {
+
+			}
+
+			@Override
+			public void onStartTrackingTouch(CircularSeekBar circularSeekBar) {
+				sharedpref.edit().putString("train_resist", String.valueOf((long) (circularSeekBar.getProgress() + setting_min_resist))).apply();
+			}
+		});
+
+
+		binding.repss.setMax(100);
+		binding.repss.setStartAngle(325);
+		binding.repss.setEndAngle(215);
+		binding.repss.setCircleStrokeWidth(25);
+		binding.repss.setPointerColor(Color.parseColor("#DF2323"));
+		binding.repss.setCircleProgressColor(Color.parseColor("#DF2323"));
+		binding.repss.setPointerStrokeWidth(60);
+		binding.repss.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(CircularSeekBar circularSeekBar, float v, boolean b) {
+				resiat_seek_progress = (int) v;
+				binding.txtRepss.setText(String.valueOf((int) (v + setting_min_resist)));
+			}
+
+			@Override
+			public void onStopTrackingTouch(CircularSeekBar circularSeekBar) {
+
+			}
+
+			@Override
+			public void onStartTrackingTouch(CircularSeekBar circularSeekBar) {
+
+				sharedpref.edit().putString("train_reps", String.valueOf((long) (circularSeekBar.getProgress() + setting_min_reps))).apply();
+				train_reps = circularSeekBar.getProgress() + setting_min_reps;
+
+			}
+		});
+
+		binding.bttnUpWeight.setOnClickListener(v ->
+		{
+			if ((int) binding.weight.getProgress() < 100)
+				binding.weight.setProgress(binding.weight.getProgress() + 1);
+		});
+
+		binding.bttnDownWeight.setOnClickListener(v ->
+		{
+			if ((int) binding.weight.getProgress() > 0)
+				binding.weight.setProgress(binding.weight.getProgress() - 1);
+		});
+
+		binding.bttnUpRepss.setOnClickListener(v ->
+		{
+			if ((int) binding.repss.getProgress() < 100)
+				binding.repss.setProgress(binding.repss.getProgress() + 1);
+		});
+
+		binding.bttnDownRepss.setOnClickListener(v ->
+		{
+			if ((int) binding.repss.getProgress() > 0)
+				binding.repss.setProgress(binding.repss.getProgress() - 1);
+		});
+
+		binding.bttnStart.setOnClickListener(v ->
+		{
+			_buttrp(binding.bttnStart);
+			binding.bttnStart.setTextColor(0xFFE0E0E0);
+			timer = new TimerTask() {
+				@Override
+				public void run() {
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							_buttr(binding.bttnStart);
+							binding.bttnStart.setTextColor(0xFFFFFFFF);
+						}
+					});
+				}
+			};
+			_timer.schedule(timer, (int) (200));
+
+			sharedpref.edit().putString("train_reps", String.valueOf((long) (binding.repss.getProgress() + setting_min_reps))).apply();
+			intent0.setClass(getApplicationContext(), RepsTrainActivity.class);
+			startActivity(intent0);
+
+			sharedpref.edit().putString("train_resist", String.valueOf((long) (binding.weight.getProgress() + setting_min_resist))).apply();
+			sharedpref.edit().putString("train_type", train_type).apply();
+		});
+
+		binding.barExpand.setTranslationX(-2000);
+		binding.bttnCancel.setTranslationX(-2000);
+		binding.txtDeviceNameIp.setTranslationX(-2000);
+		binding.txtNumberResistance.setTranslationX(-2000);
+		binding.txtRatioRangeOf.setTranslationX(-2000);
+		binding.txtResistanceR.setTranslationX(-2000);
+
+		binding.bttnBar.setOnClickListener(v->
+		{
+			if(!expand) {
+				binding.barExpand.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.bttnCancel.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtDeviceNameIp.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtNumberResistance.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtRatioRangeOf.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtResistanceR.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				expand = true;
+			}
+			else
+			{
+				binding.barExpand.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.bttnCancel.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtDeviceNameIp.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtNumberResistance.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtRatioRangeOf.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtResistanceR.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				expand = false;
+			}
+		});
+
+		binding.bttnCancel.setOnClickListener(v->
+		{
+			binding.barExpand.animate().translationX(-2000).setDuration(100);
+			binding.bttnCancel.animate().translationX(-2000).setDuration(100);
+			binding.txtDeviceNameIp.animate().translationX(-2000).setDuration(100);
+			binding.txtNumberResistance.animate().translationX(-2000).setDuration(100);
+			binding.txtRatioRangeOf.animate().translationX(-2000).setDuration(100);
+			binding.txtResistanceR.animate().translationX(-2000).setDuration(100);
+			expand = false;
+		});
+		//initialize(_savedInstanceState);
 		initializeLogic();
 	}
 	
@@ -567,14 +721,14 @@ public class ChoosetypeActivity extends  Activity {
 	}
 	
 	private void initializeLogic() {
-		imageview1.setVisibility(View.VISIBLE);
-		_weight_off();
-		if (false) {
-			_always_on();
-		}
-		txt_title.setText(sharedpref.getString("device_name", ""));
-		imageview1.setColorFilter(0xFFFFFFFF, PorterDuff.Mode.MULTIPLY);
-		linear12.setVisibility(View.GONE);
+//		imageview1.setVisibility(View.VISIBLE);
+//		_weight_off();
+//		if (false) {
+//			_always_on();
+//		}
+//		txt_title.setText(sharedpref.getString("device_name", ""));
+//		imageview1.setColorFilter(0xFFFFFFFF, PorterDuff.Mode.MULTIPLY);
+//		linear12.setVisibility(View.GONE);
 		train_resist = Double.parseDouble(sharedpref.getString("train_resist", ""));
 		train_reps = Double.parseDouble(sharedpref.getString("train_reps", ""));
 		train_secs = Double.parseDouble(sharedpref.getString("train_secs", ""));
@@ -585,78 +739,63 @@ public class ChoosetypeActivity extends  Activity {
 		setting_min_reps = Double.parseDouble(sharedpref.getString("setting_min_reps", ""));
 		setting_max_reps = Double.parseDouble(sharedpref.getString("setting_max_reps", ""));
 		train_type = sharedpref.getString("train_type", "");
-		_buttr(btn_OK);
-		_buttg(top_minus);
-		_buttg(top_plus);
-		_buttg(bottom_minus);
-		_buttg(bottom_plus);
-		_roundg(lin_resist);
+//		_buttr(btn_OK);
+//		_buttg(top_minus);
+//		_buttg(top_plus);
+//		_buttg(bottom_minus);
+//		_buttg(bottom_plus);
+//		_roundg(lin_resist);
 		resist_seek_max = setting_max_resist - setting_min_resist;
-		sb_top.setMax((int)resist_seek_max);
+		binding.weight.setMax((int)resist_seek_max);
 		resiat_seek_progress = train_resist - setting_min_resist;
-		sb_top.setProgress((int)resiat_seek_progress);
-		resist.setText(String.valueOf((long)(sb_top.getProgress() + setting_min_resist)));
-		if (train_type.equals("reps")) {
-			txt_reps.setTextColor(0xFFADADB8);
-			reps.setTextColor(0xFFFF0000);
-			txt_secs.setTextColor(0xFF474752);
-			secs.setTextColor(0xFF474752);
-			_roundr(lin_reps);
-			_roundg(lin_secs);
+		binding.weight.setProgress((int)resiat_seek_progress);
+		//resist.setText(String.valueOf((long)(sb_top.getProgress() + setting_min_resist)));
+		//if (train_type.equals("reps")) {
+			//txt_reps.setTextColor(0xFFADADB8);
+			//reps.setTextColor(0xFFFF0000);
+			//txt_secs.setTextColor(0xFF474752);
+			//secs.setTextColor(0xFF474752);
+			//_roundr(lin_reps);
+			//_roundg(lin_secs);
 			bottom_seek_max = setting_max_reps - setting_min_reps;
-			sb_bottom.setMax((int)bottom_seek_max);
+			binding.repss.setMax((int)bottom_seek_max);
 			bottom_seek_progress = train_reps - setting_min_reps;
-			sb_bottom.setProgress((int)bottom_seek_progress);
-			reps.setText(String.valueOf((long)(sb_bottom.getProgress() + setting_min_reps)));
-		}
-		else {
-			txt_secs.setTextColor(0xFFADADB8);
-			secs.setTextColor(0xFFFF0000);
-			txt_reps.setTextColor(0xFF474752);
-			reps.setTextColor(0xFF474752);
-			_roundg(lin_reps);
-			_roundr(lin_secs);
-			bottom_seek_max = setting_max_secs - setting_min_secs;
-			sb_bottom.setMax((int)bottom_seek_max);
-			bottom_seek_progress = train_secs - setting_min_secs;
-			sb_bottom.setProgress((int)bottom_seek_progress);
-			secs.setText(String.valueOf((long)(sb_bottom.getProgress() + setting_min_secs)));
-			_timeformat(sb_bottom.getProgress() + setting_min_secs);
-			s1.setText(timeformatlist.get((int)(0)));
-			s2.setText(timeformatlist.get((int)(1)));
-			s3.setText(timeformatlist.get((int)(2)));
-			s4.setText(secs.getText().toString().substring((int)(secs.getText().toString().length() - 1), (int)(secs.getText().toString().length())));
-			secs.setText(s1.getText().toString().concat(s2.getText().toString().concat(":".concat(s3.getText().toString().concat(s4.getText().toString())))));
-		}
-		sb_top.getProgressDrawable().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
+			binding.repss.setProgress((int)bottom_seek_progress);
+			//reps.setText(String.valueOf((long)(sb_bottom.getProgress() + setting_min_reps)));
+		//}
+//		else {
+//			txt_secs.setTextColor(0xFFADADB8);
+//			secs.setTextColor(0xFFFF0000);
+//			txt_reps.setTextColor(0xFF474752);
+//			reps.setTextColor(0xFF474752);
+//			_roundg(lin_reps);
+//			_roundr(lin_secs);
+//			bottom_seek_max = setting_max_secs - setting_min_secs;
+//			sb_bottom.setMax((int)bottom_seek_max);
+//			bottom_seek_progress = train_secs - setting_min_secs;
+//			sb_bottom.setProgress((int)bottom_seek_progress);
+//			secs.setText(String.valueOf((long)(sb_bottom.getProgress() + setting_min_secs)));
+//			_timeformat(sb_bottom.getProgress() + setting_min_secs);
+//			s1.setText(timeformatlist.get((int)(0)));
+//			s2.setText(timeformatlist.get((int)(1)));
+//			s3.setText(timeformatlist.get((int)(2)));
+//			s4.setText(secs.getText().toString().substring((int)(secs.getText().toString().length() - 1), (int)(secs.getText().toString().length())));
+//			secs.setText(s1.getText().toString().concat(s2.getText().toString().concat(":".concat(s3.getText().toString().concat(s4.getText().toString())))));
+//		}
+
+//		sb_top.getProgressDrawable().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
+//		sb_top.getThumb().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
+//		sb_bottom.getProgressDrawable().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
 		
-		sb_top.getThumb().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
-		
-		sb_bottom.getProgressDrawable().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
-		
-		sb_bottom.getThumb().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
-		txt_title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		top_minus.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		top_plus.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		txt_resist.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		resist.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		textview10.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		bottom_minus.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		bottom_plus.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		secs.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		txt_secs.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		txt_secs.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		reps.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		txt_reps.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		btn_OK.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
+
 		//system admin enter field
-		admin_flag_1 = false;
-		admin_flag_2 = false;
-		admin_flag_3 = false;
-		admin_flag_4 = false;
-		if (false) {
-			_motor_timer(Double.parseDouble(sharedpref.getString("end_sd", "")), Double.parseDouble(sharedpref.getString("start_sd", "")), true);
-		}
+//		admin_flag_1 = false;
+//		admin_flag_2 = false;
+//		admin_flag_3 = false;
+//		admin_flag_4 = false;
+//		if (false) {
+//			_motor_timer(Double.parseDouble(sharedpref.getString("end_sd", "")), Double.parseDouble(sharedpref.getString("start_sd", "")), true);
+//		}
 	}
 	
 	@Override
