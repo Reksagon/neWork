@@ -130,6 +130,7 @@ public class ChoosetypeActivity extends  Activity {
 	private Calendar cal = Calendar.getInstance();
 
 	Choosetype2Binding binding;
+	private int anim_distance = -2500;
 
 	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
@@ -142,9 +143,18 @@ public class ChoosetypeActivity extends  Activity {
 		reqnet = new RequestNetwork(this);
 		dia0 = new AlertDialog.Builder(this);
 
+		binding.txtWeight.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 120.f);
+		binding.txtRepss.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 120.f);
+		binding.textView2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+		binding.textView3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+
+		binding.txtDeviceNameIp.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+		binding.txtResistanceR.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+		binding.txtNumberResistance.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+		binding.txtRatioRangeOf.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
 		//binding.weight.setMax(100);
-		binding.weight.setStartAngle(325);
-		binding.weight.setEndAngle(215);
+		binding.weight.setStartAngle(320);
+		binding.weight.setEndAngle(220);
 		binding.weight.setCircleStrokeWidth(getResources().getFloat(R.dimen.stroke_width_circle));
 		binding.weight.setPointerColor(Color.parseColor("#DF2323"));
 		binding.weight.setCircleProgressColor(Color.parseColor("#DF2323"));
@@ -169,8 +179,8 @@ public class ChoosetypeActivity extends  Activity {
 
 
 		binding.repss.setMax(15);
-		binding.repss.setStartAngle(325);
-		binding.repss.setEndAngle(215);
+		binding.repss.setStartAngle(320);
+		binding.repss.setEndAngle(220);
 		binding.repss.setCircleStrokeWidth(getResources().getFloat(R.dimen.stroke_width_circle));
 		binding.repss.setPointerColor(Color.parseColor("#DF2323"));
 		binding.repss.setCircleProgressColor(Color.parseColor("#DF2323"));
@@ -210,7 +220,7 @@ public class ChoosetypeActivity extends  Activity {
 
 		binding.bttnUpRepss.setOnClickListener(v ->
 		{
-			if ((int) binding.repss.getProgress() < (int)bottom_seek_max)
+			if ((int) binding.repss.getProgress() < 15)
 				binding.repss.setProgress(binding.repss.getProgress() + 1);
 		});
 
@@ -246,12 +256,12 @@ public class ChoosetypeActivity extends  Activity {
 			sharedpref.edit().putString("train_type", train_type).apply();
 		});
 
-		binding.barExpand.setTranslationX(-2000);
-		binding.bttnCancel.setTranslationX(-2000);
-		binding.txtDeviceNameIp.setTranslationX(-2000);
-		binding.txtNumberResistance.setTranslationX(-2000);
-		binding.txtRatioRangeOf.setTranslationX(-2000);
-		binding.txtResistanceR.setTranslationX(-2000);
+		binding.barExpand.setTranslationX(anim_distance);
+		binding.bttnCancel.setTranslationX(anim_distance);
+		binding.txtDeviceNameIp.setTranslationX(anim_distance);
+		binding.txtNumberResistance.setTranslationX(anim_distance);
+		binding.txtRatioRangeOf.setTranslationX(anim_distance);
+		binding.txtResistanceR.setTranslationX(anim_distance);
 
 		binding.bttnBar.setOnClickListener(v->
 		{
@@ -266,30 +276,31 @@ public class ChoosetypeActivity extends  Activity {
 			}
 			else
 			{
-				binding.barExpand.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.bttnCancel.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtDeviceNameIp.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtNumberResistance.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtRatioRangeOf.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtResistanceR.animate().translationX(-2000).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.barExpand.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.bttnCancel.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtDeviceNameIp.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtNumberResistance.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtRatioRangeOf.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.txtResistanceR.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
 				expand = false;
 			}
 		});
 
 		binding.bttnCancel.setOnClickListener(v->
 		{
-			binding.barExpand.animate().translationX(-2000).setDuration(100);
-			binding.bttnCancel.animate().translationX(-2000).setDuration(100);
-			binding.txtDeviceNameIp.animate().translationX(-2000).setDuration(100);
-			binding.txtNumberResistance.animate().translationX(-2000).setDuration(100);
-			binding.txtRatioRangeOf.animate().translationX(-2000).setDuration(100);
-			binding.txtResistanceR.animate().translationX(-2000).setDuration(100);
+			binding.barExpand.animate().translationX(anim_distance).setDuration(100);
+			binding.bttnCancel.animate().translationX(anim_distance).setDuration(100);
+			binding.txtDeviceNameIp.animate().translationX(anim_distance).setDuration(100);
+			binding.txtNumberResistance.animate().translationX(anim_distance).setDuration(100);
+			binding.txtRatioRangeOf.animate().translationX(anim_distance).setDuration(100);
+			binding.txtResistanceR.animate().translationX(anim_distance).setDuration(100);
 			expand = false;
 		});
 		//initialize(_savedInstanceState);
 		initializeLogic();
 	}
-	
+
+
 	private void initialize(Bundle _savedInstanceState) {
 		
 		linear1 = (LinearLayout) findViewById(R.id.linear1);
