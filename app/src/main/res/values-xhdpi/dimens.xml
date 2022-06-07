@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <dimen name="fild_width">110dp</dimen>
+    <dimen name="fild_height">75dp</dimen>
+    <dimen name="circular_margin">80dp</dimen>
+    <dimen name="size_text">76sp</dimen>
+    <dimen name="bttn_width">60dp</dimen>
+    <dimen name="bttn_height">35dp</dimen>
+    <dimen name="stroke_width">30</dimen>
+    <dimen name="stroke_width_circle">10</dimen>
+    <dimen name="margin_bttn">35dp</dimen>
+</resources>

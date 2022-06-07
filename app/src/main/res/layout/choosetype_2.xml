@@ -40,13 +40,11 @@
         android:id="@+id/weight"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/circular_margin"
-        android:layout_marginBottom="@dimen/circular_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tmp_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tmp_top">
 
     </me.tankery.lib.circularseekbar.CircularSeekBar>
 
@@ -66,25 +64,27 @@
 
     <View
         android:id="@+id/bttn_up_weight"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="45dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
         android:background="@drawable/bttn_up_pressed"
-        app:layout_constraintBottom_toBottomOf="@+id/weight"
-        app:layout_constraintEnd_toEndOf="@+id/weight"
+        app:layout_constraintBottom_toTopOf="@+id/txt_weight"
+        app:layout_constraintEnd_toStartOf="@+id/tmp_weight_end"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/tmp_weight_center"
         app:layout_constraintTop_toTopOf="@+id/weight"
         app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/bttn_down_weight"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/bttn_down_pressed"
-        app:layout_constraintBottom_toBottomOf="@+id/weight"
-        app:layout_constraintStart_toStartOf="@+id/weight"
+        app:layout_constraintBottom_toTopOf="@+id/txt_weight"
+        app:layout_constraintEnd_toStartOf="@+id/tmp_weight_center"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toEndOf="@+id/tmp_weight_start"
         app:layout_constraintTop_toTopOf="@+id/weight"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -106,13 +106,11 @@
         android:id="@+id/repss"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/circular_margin"
-        android:layout_marginBottom="@dimen/circular_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tmp_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tmp_top">
 
     </me.tankery.lib.circularseekbar.CircularSeekBar>
 
@@ -132,25 +130,27 @@
 
     <View
         android:id="@+id/bttn_up_repss"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="45dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="5dp"
         android:background="@drawable/bttn_up_pressed"
-        app:layout_constraintBottom_toBottomOf="@+id/repss"
-        app:layout_constraintEnd_toEndOf="@+id/repss"
+        app:layout_constraintBottom_toTopOf="@+id/txt_repss"
+        app:layout_constraintEnd_toStartOf="@+id/tmp_reps_end"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/tmp_reps_center"
         app:layout_constraintTop_toTopOf="@+id/repss"
         app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/bttn_down_repss"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/bttn_down_pressed"
-        app:layout_constraintBottom_toBottomOf="@+id/repss"
-        app:layout_constraintStart_toStartOf="@+id/repss"
+        app:layout_constraintBottom_toTopOf="@+id/txt_repss"
+        app:layout_constraintEnd_toStartOf="@+id/tmp_reps_center"
+        app:layout_constraintHorizontal_bias="0.79"
+        app:layout_constraintStart_toEndOf="@+id/tmp_reps_start"
         app:layout_constraintTop_toTopOf="@+id/repss"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -206,6 +206,7 @@
         android:layout_marginEnd="70dp"
         android:background="@drawable/ic_cancel"
         android:translationZ="70dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/bar_expand"
         app:layout_constraintTop_toTopOf="@+id/bttn_bar" />
 
@@ -220,6 +221,7 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:translationZ="70dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -234,6 +236,7 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:translationZ="70dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/txt_device_name_ip" />
 
@@ -248,6 +251,7 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:translationZ="70dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/txt_numberResistance" />
 
@@ -262,7 +266,86 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:translationZ="70dp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/txt_ratioRange_of" />
+
+    <View
+        android:id="@+id/tmp_top"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19999999" />
+
+    <View
+        android:id="@+id/tmp_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <View
+        android:id="@+id/tmp_reps_center"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/repss"
+        app:layout_constraintStart_toStartOf="@+id/repss"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/tmp_weight_center"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/weight"
+        app:layout_constraintStart_toStartOf="@+id/weight"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/tmp_weight_end"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/weight"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="@+id/weight"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/tmp_weight_start"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/weight"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="@+id/weight"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/tmp_reps_start"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/repss"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="@+id/repss"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/tmp_reps_end"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/repss"
+        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintStart_toStartOf="@+id/repss"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

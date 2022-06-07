@@ -44,6 +44,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.DialogFragment;
 
+import androidx.annotation.RequiresApi;
+
 import com.my.neworkt.databinding.Choosetype2Binding;
 import com.my.neworkt.databinding.ChoosetypeBinding;
 
@@ -129,6 +131,7 @@ public class ChoosetypeActivity extends  Activity {
 
 	Choosetype2Binding binding;
 
+	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
@@ -139,13 +142,13 @@ public class ChoosetypeActivity extends  Activity {
 		reqnet = new RequestNetwork(this);
 		dia0 = new AlertDialog.Builder(this);
 
-		binding.weight.setMax(100);
+		//binding.weight.setMax(100);
 		binding.weight.setStartAngle(325);
 		binding.weight.setEndAngle(215);
-		binding.weight.setCircleStrokeWidth(25);
+		binding.weight.setCircleStrokeWidth(getResources().getFloat(R.dimen.stroke_width_circle));
 		binding.weight.setPointerColor(Color.parseColor("#DF2323"));
 		binding.weight.setCircleProgressColor(Color.parseColor("#DF2323"));
-		binding.weight.setPointerStrokeWidth(60);
+		binding.weight.setPointerStrokeWidth(getResources().getFloat(R.dimen.stroke_width));
 		binding.weight.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(CircularSeekBar circularSeekBar, float v, boolean b) {
@@ -165,13 +168,13 @@ public class ChoosetypeActivity extends  Activity {
 		});
 
 
-		binding.repss.setMax(100);
+		binding.repss.setMax(15);
 		binding.repss.setStartAngle(325);
 		binding.repss.setEndAngle(215);
-		binding.repss.setCircleStrokeWidth(25);
+		binding.repss.setCircleStrokeWidth(getResources().getFloat(R.dimen.stroke_width_circle));
 		binding.repss.setPointerColor(Color.parseColor("#DF2323"));
 		binding.repss.setCircleProgressColor(Color.parseColor("#DF2323"));
-		binding.repss.setPointerStrokeWidth(60);
+		binding.repss.setPointerStrokeWidth(getResources().getFloat(R.dimen.stroke_width));
 		binding.repss.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(CircularSeekBar circularSeekBar, float v, boolean b) {
@@ -195,7 +198,7 @@ public class ChoosetypeActivity extends  Activity {
 
 		binding.bttnUpWeight.setOnClickListener(v ->
 		{
-			if ((int) binding.weight.getProgress() < 100)
+			if ((int) binding.weight.getProgress() < (int)resist_seek_max)
 				binding.weight.setProgress(binding.weight.getProgress() + 1);
 		});
 
@@ -207,7 +210,7 @@ public class ChoosetypeActivity extends  Activity {
 
 		binding.bttnUpRepss.setOnClickListener(v ->
 		{
-			if ((int) binding.repss.getProgress() < 100)
+			if ((int) binding.repss.getProgress() < (int)bottom_seek_max)
 				binding.repss.setProgress(binding.repss.getProgress() + 1);
 		});
 
@@ -746,22 +749,22 @@ public class ChoosetypeActivity extends  Activity {
 //		_buttg(bottom_plus);
 //		_roundg(lin_resist);
 		resist_seek_max = setting_max_resist - setting_min_resist;
-		binding.weight.setMax((int)resist_seek_max);
+		binding.weight.setMax((int) resist_seek_max);
 		resiat_seek_progress = train_resist - setting_min_resist;
-		binding.weight.setProgress((int)resiat_seek_progress);
+		binding.weight.setProgress((int) resiat_seek_progress);
 		//resist.setText(String.valueOf((long)(sb_top.getProgress() + setting_min_resist)));
 		//if (train_type.equals("reps")) {
-			//txt_reps.setTextColor(0xFFADADB8);
-			//reps.setTextColor(0xFFFF0000);
-			//txt_secs.setTextColor(0xFF474752);
-			//secs.setTextColor(0xFF474752);
-			//_roundr(lin_reps);
-			//_roundg(lin_secs);
-			bottom_seek_max = setting_max_reps - setting_min_reps;
-			binding.repss.setMax((int)bottom_seek_max);
-			bottom_seek_progress = train_reps - setting_min_reps;
-			binding.repss.setProgress((int)bottom_seek_progress);
-			//reps.setText(String.valueOf((long)(sb_bottom.getProgress() + setting_min_reps)));
+		//txt_reps.setTextColor(0xFFADADB8);
+		//reps.setTextColor(0xFFFF0000);
+		//txt_secs.setTextColor(0xFF474752);
+		//secs.setTextColor(0xFF474752);
+		//_roundr(lin_reps);
+		//_roundg(lin_secs);
+		bottom_seek_max = setting_max_reps - setting_min_reps;
+		//binding.repss.setMax(30);
+		bottom_seek_progress = train_reps - setting_min_reps;
+		binding.repss.setProgress((int) bottom_seek_progress);
+		//reps.setText(String.valueOf((long)(sb_bottom.getProgress() + setting_min_reps)));
 		//}
 //		else {
 //			txt_secs.setTextColor(0xFFADADB8);
@@ -786,7 +789,7 @@ public class ChoosetypeActivity extends  Activity {
 //		sb_top.getProgressDrawable().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
 //		sb_top.getThumb().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
 //		sb_bottom.getProgressDrawable().setColorFilter(Color.parseColor("white"), PorterDuff.Mode.SRC_IN);
-		
+
 
 		//system admin enter field
 //		admin_flag_1 = false;
