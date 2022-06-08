@@ -1,33 +1,19 @@
 package com.my.neworkt;
 
 import android.app.Activity;
-import android.app.*;
+import android.content.res.Configuration;
 import android.os.*;
-import android.view.*;
-import android.view.View.*;
+import android.view.WindowManager;
 import android.widget.*;
-import android.content.*;
-import android.content.res.*;
 import android.graphics.*;
-import android.graphics.drawable.*;
-import android.media.*;
-import android.net.*;
-import android.text.*;
-import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
-import android.view.animation.*;
+
 import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
 import java.util.HashMap;
 import java.util.ArrayList;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
 import android.content.Intent;
-import android.net.Uri;
 import android.content.SharedPreferences;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,9 +21,6 @@ import android.view.View;
 import com.google.gson.Gson;
 import android.content.ClipData;
 import android.content.ClipboardManager;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.DialogFragment;
 
 
 public class MainActivity extends  Activity { 
@@ -50,42 +33,59 @@ public class MainActivity extends  Activity {
 	private ArrayList<String> devs = new ArrayList<>();
 	
 	private LinearLayout linear2;
-	private ImageView imageview1;
+	//private ImageView imageview1;
 	
 	private Intent intent0 = new Intent();
 	private SharedPreferences sharedpref;
 	private TimerTask timer;
 	private RequestNetwork reqnet;
 	private RequestNetwork.RequestListener _reqnet_request_listener;
+	private VideoViewCustom videoView;
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.main);
+		videoView = findViewById(R.id.intro);
+		videoView.setVideoPath("android.resource://" + getPackageName() + "/" + R.raw.intro);
+		videoView.start();
+
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+		int displayHeight = displayMetrics.heightPixels;
+		int displayWidth = displayMetrics.widthPixels;
+		videoView.setDimensions(displayWidth, displayHeight);
 		initialize(_savedInstanceState);
 		initializeLogic();
 	}
-	
+
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+		int displayHeight = displayMetrics.heightPixels;
+		int displayWidth = displayMetrics.widthPixels;
+
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
+			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
+			videoView.setDimensions(displayHeight, displayWidth);
+			videoView.getHolder().setFixedSize(displayHeight, displayWidth);
+
+		}
+	}
 	private void initialize(Bundle _savedInstanceState) {
 		
 		linear2 = (LinearLayout) findViewById(R.id.linear2);
-		imageview1 = (ImageView) findViewById(R.id.imageview1);
+
 		sharedpref = getSharedPreferences("nwtsp0", Activity.MODE_PRIVATE);
 		reqnet = new RequestNetwork(this);
-		
-		imageview1.setOnLongClickListener(new View.OnLongClickListener() {
-			 @Override
-				public boolean onLongClick(View _view) {
-				
-				return true;
-				}
-			 });
-		
-		imageview1.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				
-			}
-		});
+
 		
 		_reqnet_request_listener = new RequestNetwork.RequestListener() {
 			@Override
@@ -153,7 +153,7 @@ public class MainActivity extends  Activity {
 				});
 			}
 		};
-		_timer.schedule(timer, (int)(3000));
+		_timer.schedule(timer, (int)(5000));
 		if (sharedpref.getString("enables_exist", "").equals("")) {
 			_create_train_devices_list();
 			sharedpref.edit().putString("devices", new Gson().toJson(dev)).commit();
@@ -387,4 +387,4 @@ public class MainActivity extends  Activity {
 		return getResources().getDisplayMetrics().heightPixels;
 	}
 	
-}
+}

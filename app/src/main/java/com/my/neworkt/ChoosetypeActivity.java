@@ -1,27 +1,13 @@
 package com.my.neworkt;
 
 import android.app.Activity;
-import android.app.*;
 import android.os.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
-import android.content.*;
-import android.content.res.*;
 import android.graphics.*;
-import android.graphics.drawable.*;
-import android.media.*;
-import android.net.*;
-import android.text.*;
-import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
 import android.view.animation.*;
 import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
 import java.util.ArrayList;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,22 +18,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.content.SharedPreferences;
 import android.content.Intent;
-import android.net.Uri;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import android.view.View;
-import java.text.DecimalFormat;
-import android.graphics.Typeface;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.DialogFragment;
 
 import androidx.annotation.RequiresApi;
 
 import com.my.neworkt.databinding.Choosetype2Binding;
-import com.my.neworkt.databinding.ChoosetypeBinding;
 
 import me.tankery.lib.circularseekbar.CircularSeekBar;
 
@@ -57,7 +36,7 @@ public class ChoosetypeActivity extends  Activity {
 	private Timer _timer = new Timer();
 
 	private boolean expand = false;
-	private int time_animate = 200;
+
 	private double train_resist = 0;
 	private double setting_min_resist = 0;
 	private double setting_max_resist = 0;
@@ -131,6 +110,8 @@ public class ChoosetypeActivity extends  Activity {
 
 	Choosetype2Binding binding;
 	private int anim_distance = -2500;
+	private int time_animate = 550;
+
 
 	@RequiresApi(api = Build.VERSION_CODES.Q)
 	@Override
@@ -143,15 +124,12 @@ public class ChoosetypeActivity extends  Activity {
 		reqnet = new RequestNetwork(this);
 		dia0 = new AlertDialog.Builder(this);
 
-		binding.txtWeight.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 120.f);
-		binding.txtRepss.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 120.f);
-		binding.textView2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-		binding.textView3.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+		binding.txtDeviceName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+		binding.txtIpNumber.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+		binding.txtResistanceRatio.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+		binding.txtRangeOfResistance.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+		binding.txtRangeOfMotion.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
 
-		binding.txtDeviceNameIp.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-		binding.txtResistanceR.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-		binding.txtNumberResistance.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
-		binding.txtRatioRangeOf.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
 		//binding.weight.setMax(100);
 		binding.weight.setStartAngle(320);
 		binding.weight.setEndAngle(220);
@@ -178,7 +156,7 @@ public class ChoosetypeActivity extends  Activity {
 		});
 
 
-		binding.repss.setMax(15);
+		binding.repss.setMax(29);
 		binding.repss.setStartAngle(320);
 		binding.repss.setEndAngle(220);
 		binding.repss.setCircleStrokeWidth(getResources().getFloat(R.dimen.stroke_width_circle));
@@ -189,7 +167,7 @@ public class ChoosetypeActivity extends  Activity {
 			@Override
 			public void onProgressChanged(CircularSeekBar circularSeekBar, float v, boolean b) {
 				resiat_seek_progress = (int) v;
-				binding.txtRepss.setText(String.valueOf((int) (v + setting_min_resist)));
+				binding.txtRepss.setText(String.valueOf((int) (v) + 1));
 			}
 
 			@Override
@@ -200,7 +178,7 @@ public class ChoosetypeActivity extends  Activity {
 			@Override
 			public void onStartTrackingTouch(CircularSeekBar circularSeekBar) {
 
-				sharedpref.edit().putString("train_reps", String.valueOf((long) (circularSeekBar.getProgress() + setting_min_reps))).apply();
+				sharedpref.edit().putString("train_reps", String.valueOf((long) (circularSeekBar.getProgress() + 1))).apply();
 				train_reps = circularSeekBar.getProgress() + setting_min_reps;
 
 			}
@@ -220,10 +198,11 @@ public class ChoosetypeActivity extends  Activity {
 
 		binding.bttnUpRepss.setOnClickListener(v ->
 		{
-			if ((int) binding.repss.getProgress() < 15)
+			if ((int) binding.repss.getProgress() < 29)
 				binding.repss.setProgress(binding.repss.getProgress() + 1);
 		});
 
+		binding.repss.setProgress(1);
 		binding.bttnDownRepss.setOnClickListener(v ->
 		{
 			if ((int) binding.repss.getProgress() > 0)
@@ -258,42 +237,50 @@ public class ChoosetypeActivity extends  Activity {
 
 		binding.barExpand.setTranslationX(anim_distance);
 		binding.bttnCancel.setTranslationX(anim_distance);
-		binding.txtDeviceNameIp.setTranslationX(anim_distance);
-		binding.txtNumberResistance.setTranslationX(anim_distance);
-		binding.txtRatioRangeOf.setTranslationX(anim_distance);
-		binding.txtResistanceR.setTranslationX(anim_distance);
+		binding.txtDeviceName.setTranslationX(anim_distance);
+		binding.txtIpNumber.setTranslationX(anim_distance);
+		binding.txtResistanceRatio.setTranslationX(anim_distance);
+		binding.txtRangeOfResistance.setTranslationX(anim_distance);
+		binding.txtRangeOfMotion.setTranslationX(anim_distance);
+		binding.imageView2.setTranslationX(anim_distance);
 
 		binding.bttnBar.setOnClickListener(v->
 		{
 			if(!expand) {
-				binding.barExpand.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.bttnCancel.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtDeviceNameIp.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtNumberResistance.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtRatioRangeOf.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtResistanceR.animate().translationX(0).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.barExpand.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.bttnCancel.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtDeviceName.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtIpNumber.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtResistanceRatio.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtRangeOfResistance.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtRangeOfMotion.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.imageView2.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
 				expand = true;
 			}
 			else
 			{
-				binding.barExpand.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.bttnCancel.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtDeviceNameIp.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtNumberResistance.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtRatioRangeOf.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
-				binding.txtResistanceR.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new BounceInterpolator());
+				binding.barExpand.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.bttnCancel.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtDeviceName.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtIpNumber.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtResistanceRatio.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtRangeOfResistance.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.txtRangeOfMotion.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				binding.imageView2.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
 				expand = false;
 			}
 		});
 
 		binding.bttnCancel.setOnClickListener(v->
 		{
-			binding.barExpand.animate().translationX(anim_distance).setDuration(100);
-			binding.bttnCancel.animate().translationX(anim_distance).setDuration(100);
-			binding.txtDeviceNameIp.animate().translationX(anim_distance).setDuration(100);
-			binding.txtNumberResistance.animate().translationX(anim_distance).setDuration(100);
-			binding.txtRatioRangeOf.animate().translationX(anim_distance).setDuration(100);
-			binding.txtResistanceR.animate().translationX(anim_distance).setDuration(100);
+			binding.barExpand.animate().translationX(anim_distance).setDuration(time_animate);
+			binding.bttnCancel.animate().translationX(anim_distance).setDuration(time_animate);
+			binding.txtDeviceName.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+			binding.txtIpNumber.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+			binding.txtResistanceRatio.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+			binding.txtRangeOfResistance.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+			binding.txtRangeOfMotion.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+			binding.imageView2.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
 			expand = false;
 		});
 		//initialize(_savedInstanceState);
@@ -312,7 +299,7 @@ public class ChoosetypeActivity extends  Activity {
 		linear7 = (LinearLayout) findViewById(R.id.linear7);
 		linear13 = (LinearLayout) findViewById(R.id.linear13);
 		txt_title = (TextView) findViewById(R.id.txt_title);
-		imageview1 = (ImageView) findViewById(R.id.imageview1);
+		imageview1 = (ImageView) findViewById(R.id.intro);
 		top_minus = (TextView) findViewById(R.id.top_minus);
 		lin_resist = (LinearLayout) findViewById(R.id.lin_resist);
 		top_plus = (TextView) findViewById(R.id.top_plus);
@@ -774,7 +761,7 @@ public class ChoosetypeActivity extends  Activity {
 		bottom_seek_max = setting_max_reps - setting_min_reps;
 		//binding.repss.setMax(30);
 		bottom_seek_progress = train_reps - setting_min_reps;
-		binding.repss.setProgress((int) bottom_seek_progress);
+		binding.repss.setProgress((int) train_reps -1);
 		//reps.setText(String.valueOf((long)(sb_bottom.getProgress() + setting_min_reps)));
 		//}
 //		else {

@@ -1,27 +1,14 @@
 package com.my.neworkt;
 
 import android.app.Activity;
-import android.app.*;
 import android.os.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
-import android.content.*;
-import android.content.res.*;
 import android.graphics.*;
-import android.graphics.drawable.*;
-import android.media.*;
-import android.net.*;
-import android.text.*;
-import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
-import android.view.animation.*;
+
 import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
@@ -29,16 +16,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.content.SharedPreferences;
 import android.content.Intent;
-import android.net.Uri;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.graphics.Typeface;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.DialogFragment;
 
 
 public class NewdevActivity extends  Activity { 
@@ -89,7 +73,7 @@ public class NewdevActivity extends  Activity {
 		linear6 = (LinearLayout) findViewById(R.id.linear6);
 		linear16 = (LinearLayout) findViewById(R.id.linear16);
 		txt_title = (TextView) findViewById(R.id.txt_title);
-		imageview1 = (ImageView) findViewById(R.id.imageview1);
+		imageview1 = (ImageView) findViewById(R.id.intro);
 		linear12 = (LinearLayout) findViewById(R.id.linear12);
 		btn_OK = (Button) findViewById(R.id.btn_OK);
 		s1 = (TextView) findViewById(R.id.s1);
@@ -283,4 +267,4 @@ public class NewdevActivity extends  Activity {
 		return getResources().getDisplayMetrics().heightPixels;
 	}
 	
-}
+}

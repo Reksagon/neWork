@@ -113,7 +113,7 @@
 				android:textColor="#FFFFFF"
 				android:layout_weight="20"/>
 			<ImageView
-				android:id="@+id/imageview1"
+				android:id="@+id/intro"
 				android:layout_width="10dp"
 				android:layout_height="wrap_content"
 				android:src="@drawable/stopwatch"

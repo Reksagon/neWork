@@ -1,27 +1,13 @@
 package com.my.neworkt;
 
 import android.app.Activity;
-import android.app.*;
 import android.os.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
-import android.content.*;
-import android.content.res.*;
 import android.graphics.*;
-import android.graphics.drawable.*;
-import android.media.*;
-import android.net.*;
-import android.text.*;
-import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
-import android.view.animation.*;
+
 import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
 import java.util.ArrayList;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
@@ -32,13 +18,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.content.SharedPreferences;
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
-import java.text.DecimalFormat;
 import android.graphics.Typeface;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.DialogFragment;
 
 
 public class SecsPreActivity extends  Activity { 
@@ -111,7 +92,7 @@ public class SecsPreActivity extends  Activity {
 		textview11 = (TextView) findViewById(R.id.textview11);
 		sb_top = (SeekBar) findViewById(R.id.sb_top);
 		txt_time = (TextView) findViewById(R.id.txt_time);
-		imageview1 = (ImageView) findViewById(R.id.imageview1);
+		imageview1 = (ImageView) findViewById(R.id.intro);
 		reps_minus = (TextView) findViewById(R.id.reps_minus);
 		rd1 = (TextView) findViewById(R.id.rd1);
 		rd2 = (TextView) findViewById(R.id.rd2);
@@ -415,4 +396,4 @@ public class SecsPreActivity extends  Activity {
 		return getResources().getDisplayMetrics().heightPixels;
 	}
 	
-}
+}

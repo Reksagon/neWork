@@ -1,27 +1,14 @@
 package com.my.neworkt;
 
 import android.app.Activity;
-import android.app.*;
 import android.os.*;
 import android.view.*;
-import android.view.View.*;
 import android.widget.*;
 import android.content.*;
-import android.content.res.*;
 import android.graphics.*;
-import android.graphics.drawable.*;
-import android.media.*;
-import android.net.*;
-import android.text.*;
-import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
-import android.view.animation.*;
+
 import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
 import java.util.ArrayList;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,10 +19,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.view.View;
 import android.graphics.Typeface;
-import java.text.DecimalFormat;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.DialogFragment;
 
 
 public class WorkSumActivity extends  Activity { 
@@ -108,7 +91,7 @@ public class WorkSumActivity extends  Activity {
 		s3 = (TextView) findViewById(R.id.s3);
 		s4 = (TextView) findViewById(R.id.s4);
 		txt_time = (TextView) findViewById(R.id.txt_time);
-		imageview1 = (ImageView) findViewById(R.id.imageview1);
+		imageview1 = (ImageView) findViewById(R.id.intro);
 		textview11 = (TextView) findViewById(R.id.textview11);
 		d1 = (TextView) findViewById(R.id.d1);
 		d2 = (TextView) findViewById(R.id.d2);
@@ -371,4 +354,4 @@ public class WorkSumActivity extends  Activity {
 		return getResources().getDisplayMetrics().heightPixels;
 	}
 	
-}
+}

@@ -39,7 +39,7 @@
 				android:textColor="#FFFFFF"
 				android:layout_weight="80"/>
 			<ImageView
-				android:id="@+id/imageview1"
+				android:id="@+id/intro"
 				android:layout_width="1dp"
 				android:layout_height="wrap_content"
 				android:src="@drawable/profile"
