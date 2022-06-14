@@ -9,4 +9,5 @@
     <dimen name="stroke_width">60</dimen>
     <dimen name="stroke_width_circle">25</dimen>
     <dimen name="margin_bttn">45dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

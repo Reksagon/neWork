@@ -130,6 +130,37 @@ public class ChoosetypeActivity extends  Activity {
 		binding.txtRangeOfResistance.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
 		binding.txtRangeOfMotion.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
 
+
+		binding.txtDeviceName.setOnClickListener(v->
+		{
+			intent0.setClass(getApplicationContext(), DeviceNameActivity.class);
+			startActivity(intent0);
+		});
+
+		binding.txtIpNumber.setOnClickListener(v->
+		{
+			intent0.setClass(getApplicationContext(), IPNumberActivity.class);
+			startActivity(intent0);
+		});
+
+		binding.txtResistanceRatio.setOnClickListener(v->
+		{
+			intent0.setClass(getApplicationContext(), ResistanceRatioActivity.class);
+			startActivity(intent0);
+		});
+
+		binding.txtRangeOfResistance.setOnClickListener(v->
+		{
+			intent0.setClass(getApplicationContext(), RangeOfResistanceActivity.class);
+			startActivity(intent0);
+		});
+
+		binding.txtRangeOfMotion.setOnClickListener(v ->
+		{
+			intent0.setClass(getApplicationContext(), RangeOfMotionActivity.class);
+			startActivity(intent0);
+		});
+
 		//binding.weight.setMax(100);
 		binding.weight.setStartAngle(320);
 		binding.weight.setEndAngle(220);
@@ -287,6 +318,19 @@ public class ChoosetypeActivity extends  Activity {
 		initializeLogic();
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		binding.barExpand.setTranslationX(anim_distance);
+		binding.bttnCancel.setTranslationX(anim_distance);
+		binding.txtDeviceName.setTranslationX(anim_distance);
+		binding.txtIpNumber.setTranslationX(anim_distance);
+		binding.txtResistanceRatio.setTranslationX(anim_distance);
+		binding.txtRangeOfResistance.setTranslationX(anim_distance);
+		binding.txtRangeOfMotion.setTranslationX(anim_distance);
+		binding.imageView2.setTranslationX(anim_distance);
+		expand = false;
+	}
 
 	private void initialize(Bundle _savedInstanceState) {
 		

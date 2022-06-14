@@ -5,11 +5,18 @@
       <map>
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/drawable-xhdpi/bttn_down_pressed.xml" value="0.2265" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/drawable-xhdpi/bttn_up_pressed.xml" value="0.2265" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/drawable-xhdpi/edit_text_style.xml" value="0.248" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/activity_device_name.xml" value="0.152" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/activity_ipnumber.xml" value="0.1219059405940594" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/activity_range_of_motion.xml" value="0.1219059405940594" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/activity_range_of_resistance.xml" value="0.1219059405940594" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/activity_resistance_ratio.xml" value="0.152" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/choosetype.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/choosetype_2.xml" value="0.128" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/choosetype_2.xml" value="0.1" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/exercises.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/ident0.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/newdev1.xml" value="0.1219059405940594" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/newdev2.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/newdev3.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/newdev4.xml" value="0.22826086956521738" />
@@ -18,8 +25,8 @@
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/reps_pre.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/reps_train.xml" value="0.1" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/secs_pre.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/secs_train.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/settings221020.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/secs_train.xml" value="0.1" />
+        <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/settings221020.xml" value="0.2" />
         <entry key="..\:/Users/denko/OneDrive/Рабочий стол/neworkt/app/src/main/res/layout/work_sum.xml" value="0.22826086956521738" />
       </map>
     </option>
