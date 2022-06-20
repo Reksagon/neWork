@@ -16,9 +16,9 @@ public class RangeOfMotionActivity extends Activity {
 
     ActivityRangeOfMotionBinding binding;
     SharedPreferences sharedpref;
-
     RequestNetwork netreq;
     RequestNetwork.RequestListener _netreq_request_listener;
+    private boolean expand = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,5 +62,42 @@ public class RangeOfMotionActivity extends Activity {
 
             }
         };
+
+        binding.txtDeviceName4.setOnClickListener(ExpnadBar.clickDeviceName(this));
+        binding.txtIpNumber4.setOnClickListener(ExpnadBar.clickIpNumber(this));
+        binding.txtResistanceRatio4.setOnClickListener(ExpnadBar.clickResistanceRatio(this));
+        binding.txtRangeOfResistance4.setOnClickListener(ExpnadBar.clickRangeOfResistance(this));
+        binding.txtRangeOfMotion4.setOnClickListener(ExpnadBar.clickRangeOfMotion(this));
+        binding.bttnCancel4.setOnClickListener(ExpnadBar.clickCancel(this));
+
+        ExpnadBar.setSize(binding.txtDeviceName4, binding.txtIpNumber4,
+                binding.txtResistanceRatio4, binding.txtRangeOfResistance4, binding.txtRangeOfMotion4);
+
+        ExpnadBar.setStart(binding.barExpand4, binding.bttnCancel4, binding.txtDeviceName4, binding.txtIpNumber4,
+                binding.txtResistanceRatio4, binding.txtRangeOfResistance4, binding.txtRangeOfMotion4, binding.arrow4);
+
+
+        binding.bttnBar6.setOnClickListener(v->
+        {
+            if(!expand) {
+                ExpnadBar.setExpand(binding.barExpand4, binding.bttnCancel4, binding.txtDeviceName4, binding.txtIpNumber4,
+                        binding.txtResistanceRatio4, binding.txtRangeOfResistance4, binding.txtRangeOfMotion4, binding.arrow4);
+                expand = true;
+            }
+            else
+            {
+                ExpnadBar.setHide(binding.barExpand4, binding.bttnCancel4, binding.txtDeviceName4, binding.txtIpNumber4,
+                        binding.txtResistanceRatio4, binding.txtRangeOfResistance4, binding.txtRangeOfMotion4, binding.arrow4);
+                expand = false;
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ExpnadBar.setHide(binding.barExpand4, binding.bttnCancel4, binding.txtDeviceName4, binding.txtIpNumber4,
+                binding.txtResistanceRatio4, binding.txtRangeOfResistance4, binding.txtRangeOfMotion4, binding.arrow4);
+        expand = false;
     }
 }

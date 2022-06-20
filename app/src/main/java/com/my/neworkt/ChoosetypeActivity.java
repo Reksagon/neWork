@@ -109,8 +109,7 @@ public class ChoosetypeActivity extends  Activity {
 	private Calendar cal = Calendar.getInstance();
 
 	Choosetype2Binding binding;
-	private int anim_distance = -2500;
-	private int time_animate = 550;
+
 
 
 	@RequiresApi(api = Build.VERSION_CODES.Q)
@@ -124,42 +123,16 @@ public class ChoosetypeActivity extends  Activity {
 		reqnet = new RequestNetwork(this);
 		dia0 = new AlertDialog.Builder(this);
 
-		binding.txtDeviceName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
-		binding.txtIpNumber.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
-		binding.txtResistanceRatio.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
-		binding.txtRangeOfResistance.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
-		binding.txtRangeOfMotion.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 24);
+		ExpnadBar.setSize(binding.txtDeviceName, binding.txtIpNumber,
+				binding.txtResistanceRatio, binding.txtRangeOfResistance, binding.txtRangeOfMotion);
 
 
-		binding.txtDeviceName.setOnClickListener(v->
-		{
-			intent0.setClass(getApplicationContext(), DeviceNameActivity.class);
-			startActivity(intent0);
-		});
 
-		binding.txtIpNumber.setOnClickListener(v->
-		{
-			intent0.setClass(getApplicationContext(), IPNumberActivity.class);
-			startActivity(intent0);
-		});
-
-		binding.txtResistanceRatio.setOnClickListener(v->
-		{
-			intent0.setClass(getApplicationContext(), ResistanceRatioActivity.class);
-			startActivity(intent0);
-		});
-
-		binding.txtRangeOfResistance.setOnClickListener(v->
-		{
-			intent0.setClass(getApplicationContext(), RangeOfResistanceActivity.class);
-			startActivity(intent0);
-		});
-
-		binding.txtRangeOfMotion.setOnClickListener(v ->
-		{
-			intent0.setClass(getApplicationContext(), RangeOfMotionActivity.class);
-			startActivity(intent0);
-		});
+		binding.txtDeviceName.setOnClickListener(ExpnadBar.clickDeviceName(this));
+		binding.txtIpNumber.setOnClickListener(ExpnadBar.clickIpNumber(this));
+		binding.txtResistanceRatio.setOnClickListener(ExpnadBar.clickResistanceRatio(this));
+		binding.txtRangeOfResistance.setOnClickListener(ExpnadBar.clickRangeOfResistance(this));
+		binding.txtRangeOfMotion.setOnClickListener(ExpnadBar.clickRangeOfMotion(this));
 
 		//binding.weight.setMax(100);
 		binding.weight.setStartAngle(320);
@@ -266,52 +239,29 @@ public class ChoosetypeActivity extends  Activity {
 			sharedpref.edit().putString("train_type", train_type).apply();
 		});
 
-		binding.barExpand.setTranslationX(anim_distance);
-		binding.bttnCancel.setTranslationX(anim_distance);
-		binding.txtDeviceName.setTranslationX(anim_distance);
-		binding.txtIpNumber.setTranslationX(anim_distance);
-		binding.txtResistanceRatio.setTranslationX(anim_distance);
-		binding.txtRangeOfResistance.setTranslationX(anim_distance);
-		binding.txtRangeOfMotion.setTranslationX(anim_distance);
-		binding.imageView2.setTranslationX(anim_distance);
+		ExpnadBar.setStart(binding.barExpand, binding.bttnCancel, binding.txtDeviceName, binding.txtIpNumber,
+				binding.txtResistanceRatio, binding.txtRangeOfResistance, binding.txtRangeOfMotion, binding.imageView2);
+
 
 		binding.bttnBar.setOnClickListener(v->
 		{
 			if(!expand) {
-				binding.barExpand.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.bttnCancel.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtDeviceName.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtIpNumber.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtResistanceRatio.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtRangeOfResistance.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtRangeOfMotion.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.imageView2.animate().translationX(0).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				ExpnadBar.setExpand(binding.barExpand, binding.bttnCancel, binding.txtDeviceName, binding.txtIpNumber,
+						binding.txtResistanceRatio, binding.txtRangeOfResistance, binding.txtRangeOfMotion, binding.imageView2);
 				expand = true;
 			}
 			else
 			{
-				binding.barExpand.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.bttnCancel.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtDeviceName.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtIpNumber.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtResistanceRatio.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtRangeOfResistance.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.txtRangeOfMotion.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-				binding.imageView2.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+				ExpnadBar.setHide(binding.barExpand, binding.bttnCancel, binding.txtDeviceName, binding.txtIpNumber,
+						binding.txtResistanceRatio, binding.txtRangeOfResistance, binding.txtRangeOfMotion, binding.imageView2);
 				expand = false;
 			}
 		});
 
 		binding.bttnCancel.setOnClickListener(v->
 		{
-			binding.barExpand.animate().translationX(anim_distance).setDuration(time_animate);
-			binding.bttnCancel.animate().translationX(anim_distance).setDuration(time_animate);
-			binding.txtDeviceName.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-			binding.txtIpNumber.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-			binding.txtResistanceRatio.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-			binding.txtRangeOfResistance.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-			binding.txtRangeOfMotion.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
-			binding.imageView2.animate().translationX(anim_distance).setDuration(time_animate).setInterpolator(new LinearInterpolator());
+			ExpnadBar.setHide(binding.barExpand, binding.bttnCancel, binding.txtDeviceName, binding.txtIpNumber,
+					binding.txtResistanceRatio, binding.txtRangeOfResistance, binding.txtRangeOfMotion, binding.imageView2);
 			expand = false;
 		});
 		//initialize(_savedInstanceState);
@@ -321,14 +271,8 @@ public class ChoosetypeActivity extends  Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		binding.barExpand.setTranslationX(anim_distance);
-		binding.bttnCancel.setTranslationX(anim_distance);
-		binding.txtDeviceName.setTranslationX(anim_distance);
-		binding.txtIpNumber.setTranslationX(anim_distance);
-		binding.txtResistanceRatio.setTranslationX(anim_distance);
-		binding.txtRangeOfResistance.setTranslationX(anim_distance);
-		binding.txtRangeOfMotion.setTranslationX(anim_distance);
-		binding.imageView2.setTranslationX(anim_distance);
+		ExpnadBar.setHide(binding.barExpand, binding.bttnCancel, binding.txtDeviceName, binding.txtIpNumber,
+				binding.txtResistanceRatio, binding.txtRangeOfResistance, binding.txtRangeOfMotion, binding.imageView2);
 		expand = false;
 	}
 

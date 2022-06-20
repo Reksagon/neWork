@@ -6,6 +6,117 @@
     android:layout_height="match_parent"
     tools:context=".DeviceNameActivity">
 
+    <View
+        android:id="@+id/arrow2"
+        android:layout_width="16dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/arrow_red"
+        android:translationZ="70dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_device_name2"
+        app:layout_constraintEnd_toStartOf="@+id/txt_device_name2"
+        app:layout_constraintTop_toTopOf="@+id/txt_device_name2"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <View
+        android:id="@+id/bar_expand2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/bar_expand"
+        android:translationZ="50dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/bttn_cancel2"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="70dp"
+        android:background="@drawable/ic_cancel"
+        android:translationZ="70dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/bar_expand2"
+        app:layout_constraintTop_toTopOf="@+id/bttn_bar2" />
+
+    <TextView
+        android:id="@+id/txt_device_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="120dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Device name"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:translationZ="70dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_ip_number2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="IP Number"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:translationZ="70dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_device_name2" />
+
+    <TextView
+        android:id="@+id/txt_resistance_ratio2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Resistance ratio"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:translationZ="70dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ip_number2" />
+
+    <TextView
+        android:id="@+id/txt_range_of_resistance2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Range of resistance"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:translationZ="70dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_resistance_ratio2" />
+
+    <TextView
+        android:id="@+id/txt_range_of_motion2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Range of motion"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:translationZ="70dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/txt_range_of_resistance2" />
+
     <com.github.nikartm.button.FitButton
         android:id="@+id/bttn_save"
         android:layout_width="150dp"
@@ -78,18 +189,20 @@
         android:layout_height="0dp"
         android:background="@drawable/edit_text_style"
         android:ems="10"
+        android:gravity="center"
         android:fontFamily="@font/poppins_medium"
         android:inputType="textPersonName"
         android:paddingStart="50dp"
         android:paddingTop="5dp"
         android:paddingEnd="50dp"
-        android:textColor="#4DFFFFFF"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="@+id/guideline6"
-        app:layout_constraintVertical_bias="0.55" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView"

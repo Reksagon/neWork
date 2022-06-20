@@ -14,6 +14,7 @@ public class IPNumberActivity extends Activity {
 
     ActivityIpnumberBinding binding;
     SharedPreferences sharedpref;
+    private boolean expand = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,5 +34,42 @@ public class IPNumberActivity extends Activity {
             finish();
         });
 
+        binding.txtDeviceName3.setOnClickListener(ExpnadBar.clickDeviceName(this));
+        binding.txtIpNumber3.setOnClickListener(ExpnadBar.clickIpNumber(this));
+        binding.txtResistanceRatio3.setOnClickListener(ExpnadBar.clickResistanceRatio(this));
+        binding.txtRangeOfResistance3.setOnClickListener(ExpnadBar.clickRangeOfResistance(this));
+        binding.txtRangeOfMotion3.setOnClickListener(ExpnadBar.clickRangeOfMotion(this));
+        binding.bttnCancel3.setOnClickListener(ExpnadBar.clickCancel(this));
+
+        ExpnadBar.setSize(binding.txtDeviceName3, binding.txtIpNumber3,
+                binding.txtResistanceRatio3, binding.txtRangeOfResistance3, binding.txtRangeOfMotion3);
+
+        ExpnadBar.setStart(binding.barExpand3, binding.bttnCancel3, binding.txtDeviceName3, binding.txtIpNumber3,
+                binding.txtResistanceRatio3, binding.txtRangeOfResistance3, binding.txtRangeOfMotion3, binding.arrow3);
+
+
+        binding.bttnBar3.setOnClickListener(v->
+        {
+            if(!expand) {
+                ExpnadBar.setExpand(binding.barExpand3, binding.bttnCancel3, binding.txtDeviceName3, binding.txtIpNumber3,
+                        binding.txtResistanceRatio3, binding.txtRangeOfResistance3, binding.txtRangeOfMotion3, binding.arrow3);
+                expand = true;
+            }
+            else
+            {
+                ExpnadBar.setHide(binding.barExpand3, binding.bttnCancel3, binding.txtDeviceName3, binding.txtIpNumber3,
+                        binding.txtResistanceRatio3, binding.txtRangeOfResistance3, binding.txtRangeOfMotion3, binding.arrow3);
+                expand = false;
+            }
+        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ExpnadBar.setHide(binding.barExpand3, binding.bttnCancel3, binding.txtDeviceName3, binding.txtIpNumber3,
+                binding.txtResistanceRatio3, binding.txtRangeOfResistance3, binding.txtRangeOfMotion3, binding.arrow3);
+        expand = false;
     }
 }
