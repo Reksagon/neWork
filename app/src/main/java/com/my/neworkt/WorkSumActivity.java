@@ -1,5 +1,6 @@
 package com.my.neworkt;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.*;
 import android.view.*;
@@ -20,8 +21,15 @@ import java.util.TimerTask;
 import android.view.View;
 import android.graphics.Typeface;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class WorkSumActivity extends  Activity { 
+import com.my.neworkt.databinding.SecsTrain2Binding;
+import com.my.neworkt.databinding.WorkSumBinding;
+
+import me.tankery.lib.circularseekbar.CircularSeekBar;
+
+
+public class WorkSumActivity extends Activity {
 	
 	private Timer _timer = new Timer();
 	
@@ -66,14 +74,198 @@ public class WorkSumActivity extends  Activity {
 	
 	private SharedPreferences sharedpref;
 	private TimerTask timer0;
+	WorkSumBinding binding;
+	Handler handler = new Handler();
+	Handler handler2 = new Handler();
+	Handler handler3 = new Handler();
+	Handler handler4 = new Handler();
+	Handler handler5 = new Handler();
+	Runnable runnable = new Runnable() {
+		@Override
+		public void run() {
+			Intent intent0 = new Intent();
+			intent0.setClass(getApplicationContext(), ChoosetypeActivity.class);
+			startActivity(intent0);
+			finish();
+		}
+	};
+
+	int field = 0;
+	int main_round = -1;
+
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
-		setContentView(R.layout.work_sum);
-		initialize(_savedInstanceState);
-		initializeLogic();
+		binding = WorkSumBinding.inflate(getLayoutInflater());
+		setContentView(binding.getRoot());
+		sharedpref = getSharedPreferences("nwtsp0", Activity.MODE_PRIVATE);
+		setCircler(binding.lumeRound);
+		setCircler(binding.rangeRound);
+		setCircler(binding.powerRound);
+		setCircler(binding.mainRound);
+
+		binding.imgLogo.animate().scaleX(1.5f).setDuration(400).start();
+		binding.imgLogo.animate().scaleY(1.5f).setDuration(400).start();
+		handler.postDelayed(new Runnable() {
+			@SuppressLint("UseCompatLoadingForDrawables")
+			@Override
+			public void run() {
+				binding.imgLogo.animate().scaleX(1).setDuration(400).start();
+				binding.imgLogo.animate().scaleY(1).setDuration(400).start();
+			}
+		}, 400);
+
+		handler2.postDelayed(new Runnable() {
+			@SuppressLint("UseCompatLoadingForDrawables")
+			@Override
+			public void run() {
+				if(field == 0) {
+					binding.imgLume.setVisibility(View.VISIBLE);
+					binding.lumeScore.setVisibility(View.VISIBLE);
+					binding.lumeTxt1.setVisibility(View.VISIBLE);
+					binding.lumeTxt2.setVisibility(View.VISIBLE);
+				}
+				else if(field == 1) {
+					binding.imgPower.setVisibility(View.VISIBLE);
+					binding.powerScore.setVisibility(View.VISIBLE);
+					binding.powerTxt2.setVisibility(View.VISIBLE);
+					binding.powerTxt1.setVisibility(View.VISIBLE);
+				}
+				else if(field == 2) {
+					binding.imgRange.setVisibility(View.VISIBLE);
+					binding.rangeScore.setVisibility(View.VISIBLE);
+					binding.rangeTxt1.setVisibility(View.VISIBLE);
+					binding.rangeTxt2.setVisibility(View.VISIBLE);
+				}
+
+
+
+				if(field < 3) {
+					field++;
+					handler.postDelayed(this, 200);
+				}
+			}
+		}, 200);
+
+		handler3.postDelayed(new Runnable() {
+			@SuppressLint("UseCompatLoadingForDrawables")
+			@Override
+			public void run() {
+				if(main_round == -1)
+				{
+					binding.imgLogo2.setBackground(getResources().getDrawable(R.drawable.round_2_sum));
+				}
+
+				if(main_round >= -50)
+				{
+					binding.mainRound.setProgress(main_round);
+					main_round--;
+					handler3.postDelayed(this, 1);
+				}
+				else
+				{
+					main_round = -1;
+					binding.rangeRound.setVisibility(View.VISIBLE);
+					binding.lumeRound.setVisibility(View.VISIBLE);
+					binding.powerRound.setVisibility(View.VISIBLE);
+					int lume = sharedpref.getInt("lume", 0);
+					int power = sharedpref.getInt("power", 0);
+					int range = sharedpref.getInt("range", 0);
+					final int[] i = {0, 0, 0};
+					handler4.postDelayed(new Runnable() {
+						@Override
+						public void run() {
+							boolean f = false;
+							if (lume >= i[0]) {
+								binding.lumeScore.setText(String.valueOf(i[0]));
+								i[0]+= devide(lume);
+								f = true;
+							}
+							if (power >= i[1]) {
+								binding.powerScore.setText(String.valueOf(i[1]));
+								f = true;
+								i[1]+= devide(power);
+							}
+							if (range >= i[2]) {
+								binding.rangeScore.setText(String.valueOf(i[2]));
+								f = true;
+								i[2]+= devide(range);
+							}
+
+
+
+							if(f)
+								handler4.postDelayed(this, 1);
+
+						}
+					}, 2);
+					handler3.post(new Runnable() {
+						@Override
+						public void run() {
+
+							if(main_round >= -50)
+							{
+								binding.rangeRound.setProgress(main_round);
+								binding.lumeRound.setProgress(main_round);
+								binding.powerRound.setProgress(main_round);
+								main_round--;
+								handler3.postDelayed(this, 2);
+							}
+
+
+						}
+					});
+				}
+			}
+		}, 800);
+
+		binding.cancel.setOnClickListener(v ->
+		{
+			Intent intent0 = new Intent();
+			intent0.setClass(getApplicationContext(), ChoosetypeActivity.class);
+			startActivity(intent0);
+			finish();
+			handler5.removeCallbacks(runnable);
+		});
+
+		handler5.postDelayed(runnable, 10000);
+//		initialize(_savedInstanceState);
+//		initializeLogic();
 	}
-	
+
+	private int devide(int num)
+	{
+		if(num %9 == 0)
+			return 9;
+		else if(num %8 == 0)
+			return 8;
+		else if(num %7 == 0)
+			return 7;
+		else if(num %6 == 0)
+			return 6;
+		else if(num %5 == 0)
+			return 5;
+		else if(num %4 == 0)
+			return 4;
+		else if(num %3 == 0)
+			return 3;
+		else if(num %2 == 0)
+			return 2;
+		else
+			return 1;
+	}
+
+
+	private void setCircler(CircularSeekBar circularSeekBar)
+	{
+		circularSeekBar.setCircleStrokeWidth(3);
+		circularSeekBar.setCircleProgressColor(Color.parseColor("#DF2323"));
+		circularSeekBar.setNegativeEnabled(true);
+		circularSeekBar.setEnabled(false);
+		circularSeekBar.setMax(50);
+		//circularSeekBar.setProgress(-100);
+		circularSeekBar.setPointerStrokeWidth(1);
+	}
 	private void initialize(Bundle _savedInstanceState) {
 		
 		linear1 = (LinearLayout) findViewById(R.id.linear1);
@@ -140,19 +332,7 @@ public class WorkSumActivity extends  Activity {
 		s3.setText(timeformatlist.get((int)(2)));
 		s4.setText(String.valueOf((long)(done_time)).substring((int)(String.valueOf((long)(done_time)).length() - 1), (int)(String.valueOf((long)(done_time)).length())));
 		txt_time.setText(s1.getText().toString().concat(s2.getText().toString().concat(":".concat(s3.getText().toString().concat(s4.getText().toString())))));
-		txt_title.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		btn_OK.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		txt_time.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		textview11.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		d1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		d2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		textview12.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		txt_reps.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		rd1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		rd2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		textview10.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		txt_resist.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
-		textview13.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/rubikbold.ttf"), 0);
+
 		if (sharedpref.getString("user", "").equals("yarin")) {
 			textview13.setVisibility(View.VISIBLE);
 		}

@@ -36,7 +36,6 @@ public class ChoosetypeActivity extends  Activity {
 	private Timer _timer = new Timer();
 
 	private boolean expand = false;
-
 	private double train_resist = 0;
 	private double setting_min_resist = 0;
 	private double setting_max_resist = 0;
@@ -155,12 +154,12 @@ public class ChoosetypeActivity extends  Activity {
 
 			@Override
 			public void onStartTrackingTouch(CircularSeekBar circularSeekBar) {
-				sharedpref.edit().putString("train_resist", String.valueOf((long) (circularSeekBar.getProgress() + setting_min_resist))).apply();
+				sharedpref.edit().putString("train_resist", String.valueOf((long) (circularSeekBar.getProgress()))).apply();
 			}
 		});
 
 
-		binding.repss.setMax(29);
+		binding.repss.setMax(30);
 		binding.repss.setStartAngle(320);
 		binding.repss.setEndAngle(220);
 		binding.repss.setCircleStrokeWidth(getResources().getFloat(R.dimen.stroke_width_circle));
@@ -170,8 +169,19 @@ public class ChoosetypeActivity extends  Activity {
 		binding.repss.setOnSeekBarChangeListener(new CircularSeekBar.OnCircularSeekBarChangeListener() {
 			@Override
 			public void onProgressChanged(CircularSeekBar circularSeekBar, float v, boolean b) {
-				resiat_seek_progress = (int) v;
-				binding.txtRepss.setText(String.valueOf((int) (v) + 1));
+				if((int) v == 30)
+				{
+					resiat_seek_progress = 30;
+					binding.txtRepss.setText(String.valueOf(30));
+					sharedpref.edit().putString("train_reps", String.valueOf(30)).apply();
+					train_reps = 30;
+				}
+				else {
+					resiat_seek_progress = (int) v + setting_min_reps;
+					binding.txtRepss.setText(String.valueOf((int) (v) + (int) setting_min_reps));
+					sharedpref.edit().putString("train_reps", String.valueOf((int) (circularSeekBar.getProgress() + setting_min_reps))).apply();
+					train_reps = circularSeekBar.getProgress() + setting_min_reps;
+				}
 			}
 
 			@Override
@@ -182,8 +192,7 @@ public class ChoosetypeActivity extends  Activity {
 			@Override
 			public void onStartTrackingTouch(CircularSeekBar circularSeekBar) {
 
-				sharedpref.edit().putString("train_reps", String.valueOf((long) (circularSeekBar.getProgress() + 1))).apply();
-				train_reps = circularSeekBar.getProgress() + setting_min_reps;
+
 
 			}
 		});
@@ -202,15 +211,18 @@ public class ChoosetypeActivity extends  Activity {
 
 		binding.bttnUpRepss.setOnClickListener(v ->
 		{
-			if ((int) binding.repss.getProgress() < 29)
-				binding.repss.setProgress(binding.repss.getProgress() + 1);
+			if (Integer.parseInt(binding.txtRepss.getText().toString()) < 30)
+				binding.repss.setProgress(Integer.parseInt(binding.txtRepss.getText().toString()));
 		});
 
-		binding.repss.setProgress(1);
 		binding.bttnDownRepss.setOnClickListener(v ->
 		{
-			if ((int) binding.repss.getProgress() > 0)
-				binding.repss.setProgress(binding.repss.getProgress() - 1);
+			if (Integer.parseInt(binding.txtRepss.getText().toString()) > 1)
+				if (binding.repss.getProgress() == 30) {
+					binding.repss.setProgress(28);
+				} else {
+					binding.repss.setProgress(Integer.parseInt(binding.txtRepss.getText().toString()) - 2);
+				}
 		});
 
 		binding.bttnStart.setOnClickListener(v ->
@@ -224,16 +236,20 @@ public class ChoosetypeActivity extends  Activity {
 						@Override
 						public void run() {
 							_buttr(binding.bttnStart);
+							binding.bttnStart.setEnabled(true);
 							binding.bttnStart.setTextColor(0xFFFFFFFF);
+							intent0.setClass(getApplicationContext(), RepsTrainActivity.class);
+							startActivity(intent0);
+
 						}
 					});
 				}
 			};
 			_timer.schedule(timer, (int) (200));
 
-			sharedpref.edit().putString("train_reps", String.valueOf((long) (binding.repss.getProgress() + setting_min_reps))).apply();
-			intent0.setClass(getApplicationContext(), RepsTrainActivity.class);
-			startActivity(intent0);
+			binding.bttnStart.setEnabled(false);
+			long a = Long.parseLong(binding.txtRepss.getText().toString());
+			sharedpref.edit().putString("train_reps", String.valueOf((long) (a))).apply();
 
 			sharedpref.edit().putString("train_resist", String.valueOf((long) (binding.weight.getProgress() + setting_min_resist))).apply();
 			sharedpref.edit().putString("train_type", train_type).apply();
@@ -737,6 +753,10 @@ public class ChoosetypeActivity extends  Activity {
 		resist_seek_max = setting_max_resist - setting_min_resist;
 		binding.weight.setMax((int) resist_seek_max);
 		resiat_seek_progress = train_resist - setting_min_resist;
+		if(resiat_seek_progress == 0)
+		{
+			binding.txtWeight.setText(String.valueOf((int) (resiat_seek_progress + setting_min_resist)));
+		}
 		binding.weight.setProgress((int) resiat_seek_progress);
 		//resist.setText(String.valueOf((long)(sb_top.getProgress() + setting_min_resist)));
 		//if (train_type.equals("reps")) {
@@ -749,7 +769,9 @@ public class ChoosetypeActivity extends  Activity {
 		bottom_seek_max = setting_max_reps - setting_min_reps;
 		//binding.repss.setMax(30);
 		bottom_seek_progress = train_reps - setting_min_reps;
-		binding.repss.setProgress((int) train_reps -1);
+		binding.repss.setProgress((int) bottom_seek_progress);
+		if((int)bottom_seek_progress == 0)
+			binding.txtRepss.setText(String.valueOf(1));
 		//reps.setText(String.valueOf((long)(sb_bottom.getProgress() + setting_min_reps)));
 		//}
 //		else {
